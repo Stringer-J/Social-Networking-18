@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const thoughtSchema = new Schema({
-    thoughtText: { type: String, required: true, maxlength: [280, 'Cannot be longer than 280 characters']},
+    thoughtText: { type: String, required: true, maxlength: [280, 'Cannot be longer than 280 characters'] },
     createdAt: { type: Date, default: Date.now, get: formatDate },
     username: { type: String, required: true },
     reactions: [],
