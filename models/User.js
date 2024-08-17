@@ -8,8 +8,8 @@ const userSchema = new Schema({
     friends: [],
 });
 
-userSchema.virtual('tbd').get(function() { //needs to be finished
-    return;
+userSchema.virtual('friendCount').get(function() { //needs to be finished
+    return this.friends.length;
 });
 
 userSchema.set('toJSON', { virtuals: true });

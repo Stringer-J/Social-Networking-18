@@ -16,8 +16,8 @@ function formatDate(date) {
     return date.toISOString().split('T')[0];
 }
 
-thoughtsSchema.virtual('tbd').get(function() { //needs to be finished
-    return;
+thoughtsSchema.virtual('reactionCount').get(function() { //needs to be finished
+    return this.reactions.length;
 });
 
 thoughtsSchema.set('toJSON', { virtuals: true });
