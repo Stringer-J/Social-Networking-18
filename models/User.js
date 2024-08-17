@@ -8,6 +8,13 @@ const userSchema = new Schema({
     friends: [],
 });
 
+userSchema.virtual('tbd').get(function() { //needs to be finished
+    return;
+});
+
+userSchema.set('toJSON', { virtuals: true });
+userSchema.set('toObject', { virtuals: true });
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

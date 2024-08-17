@@ -16,6 +16,13 @@ function formatDate(date) {
     return date.toISOString().split('T')[0];
 }
 
+thoughtsSchema.virtual('tbd').get(function() { //needs to be finished
+    return;
+});
+
+thoughtsSchema.set('toJSON', { virtuals: true });
+thoughtsSchema.set('toObject', { virtuals: true });
+
 const Thought = mongoose.model('Thought', thoughtSchema);
 
 module.exports = Thought;
