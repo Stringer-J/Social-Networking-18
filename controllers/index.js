@@ -1,8 +1,7 @@
-const express = require('express');
-const router = express.Router();
+const UsersController = require('./usersController');
+const ThoughtsController = require('./thoughtsController')
 
-router.get('/', (req, res) => {
-    res.send('This worked');
-});
-
-module.exports = router;
+module.exports = {
+    UsersController,
+    ThoughtsController
+};
