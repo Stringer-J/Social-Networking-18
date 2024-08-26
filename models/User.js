@@ -8,7 +8,7 @@ const userSchema = new Schema({
     friends: [],
 });
 
-userSchema.virtual('friendCount').get(function() { //needs to be finished
+userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 });
 

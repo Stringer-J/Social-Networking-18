@@ -16,7 +16,7 @@ function formatDate(date) {
     return date.toISOString().split('T')[0];
 }
 
-thoughtSchema.virtual('reactionCount').get(function() { //needs to be finished
+thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 });
 
