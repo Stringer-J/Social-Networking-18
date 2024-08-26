@@ -16,12 +16,12 @@ function formatDate(date) {
     return date.toISOString().split('T')[0];
 }
 
-thoughtsSchema.virtual('reactionCount').get(function() { //needs to be finished
+thoughtSchema.virtual('reactionCount').get(function() { //needs to be finished
     return this.reactions.length;
 });
 
-thoughtsSchema.set('toJSON', { virtuals: true });
-thoughtsSchema.set('toObject', { virtuals: true });
+thoughtSchema.set('toJSON', { virtuals: true });
+thoughtSchema.set('toObject', { virtuals: true });
 
 const Thought = mongoose.model('Thought', thoughtSchema);
 

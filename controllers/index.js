@@ -1,7 +1,7 @@
-const UsersController = require('./usersController');
-const ThoughtsController = require('./thoughtsController')
+const UserController = require('./userController');
+const ThoughtController = require('./thoughtController')
 
 module.exports = {
-    UsersController,
-    ThoughtsController
+    UserController,
+    ThoughtController
 };

@@ -9,7 +9,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(require('./controllers/'));
+try {
+    const controllers = require('./controllers/');
+    app.use(controllers);
+} catch (err) {
+    console.error('Error loading controllers', err);
+}
 
 const mongoURI = 'mongodb://localhost:27017/mydatabase'; //change when i get a db set up
 

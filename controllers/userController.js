@@ -1,8 +1,9 @@
 const User = require('../models/User');
 
 const UsersController = {
-    getAll: async (req, res) => {
 
+    getAll: async (req, res) => {
+        console.log('this is user');
     },
 
     getOneById: async (req, res) => {
