@@ -16,7 +16,7 @@ try {
     console.error('Error loading controllers', err);
 }
 
-const mongoURI = 'mongodb://localhost:27017/mydatabase'; //change when i get a db set up
+const mongoURI = 'mongodb://localhost:27017/social_db';
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
