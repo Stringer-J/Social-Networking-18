@@ -1,28 +1,16 @@
-const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
+const db = require('./config/connection');
+const routes = require('./routes');
 
-const app = express();
 const PORT = process.env.PORT || 3001;
+const app = express();
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(routes);
 
-try {
-    const controllers = require('./controllers/');
-    app.use(controllers);
-} catch (err) {
-    console.error('Error loading controllers', err);
-}
-
-const mongoURI = 'mongodb://localhost:27017/social_db';
-
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected!'))
-.catch(err => console.error('MongoDB connection failed', err));
-
-app.listen(PORT, () => console.log('Server running'));
+db.once('open', () => {
+    app.listen(PORT, () => {
+        console.log(`API server running on port ${PORT}`);
+    });
+});
