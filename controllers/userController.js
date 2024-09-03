@@ -48,7 +48,28 @@ const UsersController = {
     },
 
     putUser: async (req, res) => {
-        res.send('this is user - put user');
+        try {
+            const userId = req.params.id;
+            const updateData = req.body;
+
+            if (!userId || !updateData) {
+                return res.status(400).json({ message: 'User and update required' });
+            }
+
+            const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+                new: true,
+                runValidators: true
+            });
+
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            res.status(200).json(updatedUser);
+        } catch (error) {
+            console.error('Error updating User:', error);
+            res.status(500).json({ message: 'Error updating User', error });
+        }
     },
 
     deleteUser: async (req, res) => {
