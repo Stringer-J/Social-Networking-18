@@ -11,7 +11,7 @@ const {
 router.route('/').get(getAll).post(postUser);
 
 router
-    .route('/:_id')
+    .route('/:id')
     .get(getOneById)
     .put(putUser)
     .delete(deleteUser);

@@ -12,7 +12,17 @@ const UsersController = {
     },
 
     getOneById: async (req, res) => {
-        res.send('this is user - get one by id');
+        try {
+            const userId = req.params.id;
+            console.log('User ID: ', userId);
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching user', error });
+        }
     },
 
     postUser: async (req, res) => {
