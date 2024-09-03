@@ -49,7 +49,28 @@ const ThoughtController = {
     },
 
     putThought: async (req, res) => {
-        res.send('this is thought - put');
+        try {
+            const thoughtId = req.params.id;
+            const updateData = req.body;
+
+            if (!thoughtId || !updateData) {
+                return res.status(400).json({ message: 'Thought Id and update required' });
+            }
+
+            const updatedThought = await Thought.findByIdAndUpdate(thoughtId, updateData, {
+                new: true,
+                runValidators: true
+            });
+
+            if (!updatedThought) {
+                return res.status(404).json({ message: 'Thought not found' });
+            }
+
+            res.status(200).json(updatedThought);
+        } catch (error) {
+            console.error('Error updating Thought:', error);
+            res.status(500).json({ message: 'Error updating Thought', error });
+        }
     },
 
     deleteThought: async (req, res) => {
