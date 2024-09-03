@@ -5,7 +5,8 @@ const thoughtSchema = new Schema({
     thoughtText: { type: String, required: true, maxlength: [280, 'Cannot be longer than 280 characters'] },
     createdAt: { type: Date, default: Date.now, get: formatDate },
     username: { type: String, required: true },
-    reactions: [],
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    reactions: [{ type: Schema.Types.ObjectId, ref: 'Reaction' }],
 }, {
     toJSON: { getters: true },
     toObject: { getters: true }

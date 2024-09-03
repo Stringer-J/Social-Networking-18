@@ -1,4 +1,5 @@
 const Thought = require('../models/Thought');
+const User = require('../models/User');
 
 const ThoughtController = {
     
@@ -26,7 +27,25 @@ const ThoughtController = {
     },
 
     postThought: async (req, res) => {
-        res.send('this is thought - post');
+        try {
+            const { thoughtText, username, userId } = req.body;
+
+            const newThought = new Thought({
+                thoughtText,
+                username,
+                user: userId
+            });
+
+            const savedThought = await newThought.save();
+
+            await User.findByIdAndUpdate(userId, {
+                $push: { thoughts: savedThought._id }
+            });
+
+            res.status(201).json(savedThought);
+        } catch (error) {
+            res.status(500).json({ message: 'Error making thought', error });
+        }
     },
 
     putThought: async (req, res) => {
