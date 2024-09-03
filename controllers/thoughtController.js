@@ -74,7 +74,24 @@ const ThoughtController = {
     },
 
     deleteThought: async (req, res) => {
-        res.send('this is thought - delete');
+        try {
+            const thoughtId = req.params.id;
+
+            if(!thoughtId) {
+                return res.status(400).json({ message: 'Thought required' });
+            }
+
+            const deletedThought = await Thought.findByIdAndDelete(thoughtId);
+
+            if (!deletedThought) {
+                return res.status(404).json({ message: 'Thought not found' });
+            }
+
+            res.status(200).json({ message: 'Thought deleted', deletedThought });
+        } catch (error) {
+            console.error('Error deleting Thought:', error);
+            res.status(500).json({ message: 'Error deleting Thought', error });
+        }
     }
 };
 
