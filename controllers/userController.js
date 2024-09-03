@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Thought = require('../models/Thought');
 
 const UsersController = {
 
@@ -82,6 +83,7 @@ const UsersController = {
                 return res.status(400).json({ message: 'User required' });
             }
 
+            await Thought.deleteMany({ user: userId });
             const deletedUser = await User.findByIdAndDelete(userId);
 
             if (!deletedUser) {
