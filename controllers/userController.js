@@ -26,7 +26,25 @@ const UsersController = {
     },
 
     postUser: async (req, res) => {
-        res.send('this is user - post user');
+        try {
+            const { username, email } = req.body;
+            
+            if (!username || !email) {
+                return res.status(400).json({ message: 'Username and Email required' });
+            }
+
+            const newUser = new User({
+                username,
+                email
+            });
+
+            const savedUser = await newUser.save();
+            res.status(201).json(savedUser);
+
+        } catch (error) {
+            console.error('Error creating user:', error);
+            res.status(500).json({ message: 'Error creating user', error });
+        }
     },
 
     putUser: async (req, res) => {
