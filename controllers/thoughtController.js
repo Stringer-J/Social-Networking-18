@@ -1,5 +1,6 @@
 const Thought = require('../models/Thought');
 const User = require('../models/User');
+const Reaction = require('../models/Reaction');
 
 const ThoughtController = {
     
@@ -96,7 +97,22 @@ const ThoughtController = {
 
     addReaction: async (req, res) => {
         try {
+            const thoughtId = req.params.thoughtId;
+            const { reactionBody, username } = req.body;
 
+            const newReaction = new Reaction({
+                reactionBody,
+                username,
+                thought: thoughtId
+            });
+
+            const savedReaction = await newReaction.save();
+
+            await Thought.findByIdAndUpdate(thoughtId, {
+                $push: { reactions: savedReaction._id }
+            });
+
+            res.status(201).json(savedReaction);
         } catch (error) {
             console.error('Error adding reaction');
             res.status(500).json({ message: 'Error adding reaction', error });
@@ -107,7 +123,7 @@ const ThoughtController = {
         try {
 
         } catch (error) {
-            console.error('Error removing reaciont');
+            console.error('Error removing reaction');
             res.status(500).json({ message: 'Error removing reaction', error });
         }
     }
