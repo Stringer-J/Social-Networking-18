@@ -109,11 +109,16 @@ const UsersController = {
                 return res.status(400).json({ message: 'User and friend required' });
             }
 
-            const user = await User.findByIdAndUpdate(userId, {
-                $push: { friends: friendId }
-            });
+            const user = await User.findByIdAndUpdate(userId,
+                { $push: { friends: friendId } },
+                { new: true, runValidators: true }
+            );
 
-            res.status(200).json(user);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            res.status(200).json({ meesage: 'Friend added', user: user });
         } catch (error) {
             console.error('Error adding friend');
             res.status(500).json({ message: 'Error adding friend', error });
@@ -122,7 +127,23 @@ const UsersController = {
 
     removeFriend: async (req, res) => {
         try {
+            const userId = req.params.userId;
+            const friendId = req.params.friendId;
 
+            if (!userId || !friendId) {
+                return res.status(400).json({ message: 'User and friend required' });
+            }
+
+            const user = await User.findByIdAndUpdate(userId,
+                { $pull: { friends: friendId } },
+                { new: true, runValidators: true }
+            );
+
+            if (!user) {
+                return res.status(404).json({ message: 'User not found '});
+            }
+
+            res.status(200).json({ message: 'Friend removed', user: user });
         } catch (error) {
             console.error('Error removing friend');
             res.status(500).json({ message: 'Error removing friend', error });
