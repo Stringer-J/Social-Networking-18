@@ -100,7 +100,20 @@ const UsersController = {
 
     addFriend: async (req, res) => {
         try {
+            const userId = req.params.userId;
+            console.log('User: ', userId);
+            const friendId = req.params.friendId;
+            console.log('Friend: ', friendId);
 
+            if (!userId || !friendId) {
+                return res.status(400).json({ message: 'User and friend required' });
+            }
+
+            const user = await User.findByIdAndUpdate(userId, {
+                $push: { friends: friendId }
+            });
+
+            res.status(200).json(user);
         } catch (error) {
             console.error('Error adding friend');
             res.status(500).json({ message: 'Error adding friend', error });
