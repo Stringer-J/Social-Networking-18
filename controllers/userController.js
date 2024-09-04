@@ -102,7 +102,8 @@ const UsersController = {
         try {
 
         } catch (error) {
-
+            console.error('Error adding friend');
+            res.status(500).json({ message: 'Error adding friend', error });
         }
     },
 
@@ -110,7 +111,8 @@ const UsersController = {
         try {
 
         } catch (error) {
-            
+            console.error('Error removing friend');
+            res.status(500).json({ message: 'Error removing friend', error });
         }
     }
 };

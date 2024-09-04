@@ -98,7 +98,8 @@ const ThoughtController = {
         try {
 
         } catch (error) {
-
+            console.error('Error adding reaction');
+            res.status(500).json({ message: 'Error adding reaction', error });
         }
     },
 
@@ -106,7 +107,8 @@ const ThoughtController = {
         try {
 
         } catch (error) {
-            
+            console.error('Error removing reaciont');
+            res.status(500).json({ message: 'Error removing reaction', error });
         }
     }
 };
