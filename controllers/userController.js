@@ -5,9 +5,7 @@ const UsersController = {
 
     getAll: async (req, res) => {
         try {
-            const users = await User.find()
-                .populate('thoughts')
-                .exec();
+            const users = await User.find();
             res.status(200).json(users);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching users', error });
@@ -18,7 +16,10 @@ const UsersController = {
         try {
             const userId = req.params.id;
             console.log('User ID: ', userId);
-            const user = await User.findById(userId);
+            const user = await User.findById(userId)
+                .populate('thoughts')
+                .populate('friends')
+                .exec();
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
