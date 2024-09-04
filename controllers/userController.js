@@ -96,6 +96,22 @@ const UsersController = {
             console.error('Error deleting User:', error);
             res.status(500).json({ message: 'Error deleting User', error });
         }
+    },
+
+    addFriend: async (req, res) => {
+        try {
+
+        } catch (error) {
+
+        }
+    },
+
+    removeFriend: async (req, res) => {
+        try {
+
+        } catch (error) {
+            
+        }
     }
 };
 

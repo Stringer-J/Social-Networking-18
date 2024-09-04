@@ -92,6 +92,22 @@ const ThoughtController = {
             console.error('Error deleting Thought:', error);
             res.status(500).json({ message: 'Error deleting Thought', error });
         }
+    },
+
+    addReaction: async (req, res) => {
+        try {
+
+        } catch (error) {
+
+        }
+    },
+
+    removeReaction: async (req, res) => {
+        try {
+
+        } catch (error) {
+            
+        }
     }
 };
 

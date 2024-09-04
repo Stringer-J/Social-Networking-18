@@ -6,9 +6,19 @@ const {
     postUser,
     putUser,
     deleteUser,
+    addFriend,
+    removeFriend,
 } = require('../../controllers/userController');
 
-router.route('/').get(getAll).post(postUser);
+router
+    .route('/')
+    .get(getAll)
+    .post(postUser);
+
+router
+    .route('/users/:userId/friends/:friendId')
+    .post(addFriend)
+    .delete(removeFriend);
 
 router
     .route('/:id')
