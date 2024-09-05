@@ -17,7 +17,9 @@ const ThoughtController = {
         try {
             const thoughtId = req.params.id;
             console.log('Thought ID: ', thoughtId);
-            const thought = await Thought.findById(thoughtId);
+            const thought = await Thought.findById(thoughtId)
+                .populate('reactions')
+                .exec();
             if (!thought) {
                 return res.status(400).json({ message: 'Thought not found' });
             }
@@ -119,9 +121,22 @@ const ThoughtController = {
         }
     },
 
+    // /:thoughtId/reactions
     removeReaction: async (req, res) => {
         try {
+            const thoughtId = req.params.thoughtId;
+            const { reactionId } = req.body;
 
+            if (!thoughtId) {
+                return res.status(400).json({ message: 'Thought required' });
+            }
+
+            const updatedThought = await Thought.findByIdAndUpdate(thoughtId,
+                { $pull: { reactions: reactionId } },
+                { new: true, runValidators: true }
+            );
+
+            res.status(200).json(updatedThought);
         } catch (error) {
             console.error('Error removing reaction');
             res.status(500).json({ message: 'Error removing reaction', error });
