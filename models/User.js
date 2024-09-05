@@ -8,6 +8,7 @@ const userSchema = new Schema({
     friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
+//counts your friends
 userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 });

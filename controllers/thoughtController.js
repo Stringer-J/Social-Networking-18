@@ -4,6 +4,7 @@ const Reaction = require('../models/Reaction');
 
 const ThoughtController = {
     
+    //gets all thoughts
     getAll: async (req, res) => {
         try {
             const thoughts = await Thought.find();
@@ -13,6 +14,7 @@ const ThoughtController = {
         }
     },
 
+    //gets one thought by id
     getOneById: async (req, res) => {
         try {
             const thoughtId = req.params.id;
@@ -29,6 +31,7 @@ const ThoughtController = {
         }
     },
 
+    //makes a new thought
     postThought: async (req, res) => {
         try {
             const { thoughtText, username, userId } = req.body;
@@ -51,6 +54,7 @@ const ThoughtController = {
         }
     },
 
+    //updates an existing thought
     putThought: async (req, res) => {
         try {
             const thoughtId = req.params.id;
@@ -76,6 +80,7 @@ const ThoughtController = {
         }
     },
 
+    //deletes an existing thought
     deleteThought: async (req, res) => {
         try {
             const thoughtId = req.params.id;
@@ -97,6 +102,7 @@ const ThoughtController = {
         }
     },
 
+    //lets you add a reaction to a thought
     addReaction: async (req, res) => {
         try {
             const thoughtId = req.params.thoughtId;
@@ -121,7 +127,7 @@ const ThoughtController = {
         }
     },
 
-    // /:thoughtId/reactions
+    //lets you remove a reaction from a thought
     removeReaction: async (req, res) => {
         try {
             const thoughtId = req.params.thoughtId;
@@ -144,4 +150,5 @@ const ThoughtController = {
     }
 };
 
+//exports the functions
 module.exports = ThoughtController;

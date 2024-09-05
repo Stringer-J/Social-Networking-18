@@ -5,3 +5,5 @@ module.exports = {
     UserController,
     ThoughtController
 };
+
+//centralizes my controllers

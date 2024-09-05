@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+//gets functions from user controller
 const {
     getAll,
     getOneById,
@@ -10,6 +11,7 @@ const {
     removeFriend,
 } = require('../../controllers/userController');
 
+//sets up routes for each type of request/each function
 router
     .route('/')
     .get(getAll)

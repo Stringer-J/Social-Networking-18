@@ -3,6 +3,7 @@ const Thought = require('../models/Thought');
 
 const UsersController = {
 
+    //gets all users
     getAll: async (req, res) => {
         try {
             const users = await User.find();
@@ -12,6 +13,7 @@ const UsersController = {
         }
     },
 
+    //gets one user by id
     getOneById: async (req, res) => {
         try {
             const userId = req.params.id;
@@ -29,6 +31,7 @@ const UsersController = {
         }
     },
 
+    //makes a new user
     postUser: async (req, res) => {
         try {
             const { username, email } = req.body;
@@ -51,6 +54,7 @@ const UsersController = {
         }
     },
 
+    //updates an existing user
     putUser: async (req, res) => {
         try {
             const userId = req.params.id;
@@ -76,6 +80,7 @@ const UsersController = {
         }
     },
 
+    //deletes and existing user and their thoughts
     deleteUser: async (req, res) => {
         try {
             const userId = req.params.id;
@@ -98,6 +103,7 @@ const UsersController = {
         }
     },
 
+    //lets you add a friend to a user
     addFriend: async (req, res) => {
         try {
             const userId = req.params.userId;
@@ -125,6 +131,7 @@ const UsersController = {
         }
     },
 
+    //lets you remove a friend from a user
     removeFriend: async (req, res) => {
         try {
             const userId = req.params.userId;
@@ -151,4 +158,5 @@ const UsersController = {
     }
 };
 
+//exports the user functions
 module.exports = UsersController;

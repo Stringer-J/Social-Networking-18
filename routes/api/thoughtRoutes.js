@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+//gets all the functions from thought controller
 const {
     getAll,
     getOneById,
@@ -10,6 +11,7 @@ const {
     removeReaction,
 } = require('../../controllers/thoughtController');
 
+//sets up routes for each type of request/each function
 router
     .route('/')
     .get(getAll)

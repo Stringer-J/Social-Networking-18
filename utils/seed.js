@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 const Thought = require('../models/Thought');
 
+//makes user seeds
 const users = [
     { username: 'Josh', email: 'joshstringer@live.com' },
     { username: 'Mariah', email: 'mariahisalabama@yahoo.com' },
@@ -13,6 +14,7 @@ const users = [
     { username: 'Bob', email: 'icanpaint@whatever.com' }
 ];
 
+//sets up mongo database and seeds it by removing data if it exist and putting new data in
 const MONGO_URI = 'mongodb://localhost:27017/social_db';
 
 const seedDB = async () => {
@@ -35,4 +37,5 @@ const seedDB = async () => {
     }
 };
 
+//actually runs the seed function
 seedDB();
